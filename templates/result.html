@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+</head>
+<body>
+    <h1>Result Page</h1>
+    <p><strong>Selected Gender:</strong> {{ selected_gender }}</p>
+    
+    <h2>Slider Values:</h2>
+    <ul>
+        {% if slider_values %}
+            {% for title, value in slider_values.items() %}
+                <li><strong>{{ title }}:</strong> {{ value }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No slider values were submitted.</li>
+        {% endif %}
+    </ul>
+    
+    <p><strong>Average Value:</strong> {{ average_value }}</p>
+    
+    <a href="/">Go back to the main page</a>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slider Titles and Gender</title>
+    <style>
+
+        .custom-range {
+            width: 80%;
+        }
+    
+
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0; 
+        }
+
+
+        .gender-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Slider Titles</h1>
+    <form method="post" action="/result">
+        {% for title, formatted_title in title_data %}
+        <div class="slider-container">
+            <h2>{{ title }}</h2>
+            <input type="range" class="custom-range" id="{{ formatted_title }}" name="{{ formatted_title }}" min="0" max="3" step="0.001" value="1.5">
+        </div>
+        {% endfor %}
+
+        <div class="gender-container">
+            <h2>Gender</h2>
+        </div>
+        <div class="gender-container">
+            <input type="radio" name="gender" value="male" checked> Male
+            <input type="radio" name="gender" value="female"> Female
+            <input type="radio" name="gender" value="other"> Other
+        </div>
+        <!--  button to link to /result -->
+        <div class="button-container">
+            <input type="submit" value="Submit">
+        </div>
+
+        <!-- button to link to /qrcode -->
+        <div class="button-container">
+            <a href="{{ url_for('generate_qrcode') }}" class="btn btn-primary">Get QR Code</a>
+        </div>
+    </form>
+</body>
+</html>
