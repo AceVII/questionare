@@ -39,21 +39,21 @@ def generate_qrcode():
 #The main function
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    slider_titles = read_slider_titles()
+
     if request.method == 'POST':
 
         selected_gender = request.form['gender']
         
         slider_values = {}
-        slider_titles = read_slider_titles()
         for title in slider_titles:
             formatted_title = title.lower().replace(" ", "-")
-            value = float(request.form[formatted_title])  # Assuming your sliders return float values
+            value = float(request.form[formatted_title])  # assuming The sliders return will float values
             slider_values[title] = value
 
         # Redirect to the result page with the data
         return redirect(url_for('result', selected_gender=selected_gender, slider_values=slider_values))
 
-    slider_titles = read_slider_titles()
     formatted_titles = [title.lower().replace(" ", "-") for title in slider_titles]
     title_data = list(zip(slider_titles, formatted_titles))
 
@@ -71,7 +71,7 @@ def result():
             value = float(request.form[formatted_title])
             slider_values[title] = value
         
-
+ 
         average_value = mean(slider_values.values())
     
         return render_template('result.html', selected_gender=selected_gender, slider_values=slider_values, average_value=average_value)
